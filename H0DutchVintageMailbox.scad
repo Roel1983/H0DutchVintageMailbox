@@ -15,8 +15,12 @@ module Base(o = 0) {
     Base();
     
     rotate(90, VEC_X) {
-        linear_extrude(mm(2.85)) import("Front_layer1.svg");
-        linear_extrude(mm(2.95)) import("Front_layer2.svg");
+        linear_extrude(mm(2.85)) {
+            import("views/BaseFrontLayer1.svg");
+        }
+        linear_extrude(mm(2.95)) {
+            import("views/BaseFrontLayer2.svg");
+        }
     }
     
     module Base(o = 0) {
@@ -27,7 +31,9 @@ module Base(o = 0) {
                     center = true,
                     convexity = 3
                 ) {
-                    offset(o) import("Base_front.svg");
+                    offset(o) mirror_copy(VEC_X) {
+                        import("views/BaseFront.svg");
+                    }
                 }
             }
             rotate(90) rotate(90, VEC_X) {
@@ -36,7 +42,7 @@ module Base(o = 0) {
                     center = true,
                     convexity = 3
                 ) {
-                    offset(o) import("Base_side.svg");
+                    offset(o) import("views/BaseSide.svg");
                 }
             }
         }
@@ -44,24 +50,26 @@ module Base(o = 0) {
 }
 
 module Top() {
-    rotate_extrude($fn = 32) import("Top.svg");
+    rotate_extrude($fn = 32) import("views/Top.svg");
 }
 
 module Roof() {
-    Octal(-.55) import("Roof.svg");
+    Octal(-.55) import("views/Roof.svg");
 }
 
 module TopBanner() {
-    Octal(-1) import("Top_banner.svg");
+    Octal(-1) import("views/TopBanner.svg");
 }
 
 module MidBanner() {
-    Octal(-1) import("Mid_banner.svg");
+    Octal(-1) import("views/MidBanner.svg");
 }
 
 module BottomBanner() {
-    Octal(-4.0) {
-        translate([0, 1.7]) square([2.95, 0.35]);
+    Octal(-1.1) {
+        mirror_copy(VEC_X) {
+            import("views/BottomBanner.svg");
+        }
     }
 }
 
