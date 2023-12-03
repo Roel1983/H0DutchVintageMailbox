@@ -7,11 +7,11 @@ Base();
 
 Top();
 Roof();
-TopBanner();
+//TopBanner();
 MidBanner();
 BottomBanner();
 
-module Base(o = 0) {
+module Base() {
     Base();
     
     rotate(90, VEC_X) {
@@ -23,15 +23,15 @@ module Base(o = 0) {
         }
     }
     
-    module Base(o = 0) {
+    module Base() {
         intersection() {
             rotate(90, VEC_X) {
                 linear_extrude(
-                    mm(7),
+                    mm(8),
                     center = true,
                     convexity = 3
                 ) {
-                    offset(o) mirror_copy(VEC_X) {
+                    mirror_copy(VEC_X) {
                         import("views/BaseFront.svg");
                     }
                 }
@@ -42,7 +42,7 @@ module Base(o = 0) {
                     center = true,
                     convexity = 3
                 ) {
-                    offset(o) import("views/BaseSide.svg");
+                    import("views/BaseSide.svg");
                 }
             }
         }
@@ -103,7 +103,7 @@ module Octal(a) {
                 center = true,
                 convexity = 3
             ) {
-                mirror_copy(VEC_X) {
+                render() mirror_copy(VEC_X) {
                     if(o < 0) {
                         translate([o,0]) children();
                     }
