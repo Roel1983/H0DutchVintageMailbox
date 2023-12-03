@@ -15,10 +15,10 @@ module Base(o = 0) {
     Base();
     
     rotate(90, VEC_X) {
-        linear_extrude(mm(2.85)) {
+        linear_extrude(mm(2.82)) {
             import("views/BaseFrontLayer1.svg");
         }
-        linear_extrude(mm(2.95)) {
+        linear_extrude(mm(2.89)) {
             import("views/BaseFrontLayer2.svg");
         }
     }
@@ -58,11 +58,27 @@ module Roof() {
 }
 
 module TopBanner() {
-    Octal(-1) import("views/TopBanner.svg");
+    difference() {
+        Octal(-1) import("views/TopBanner.svg");
+        translate([0, 0, 14.5]) difference() {
+            union() {
+                cube([5.2, 8, .6], true);
+                cube([8,5.2, .6], true);
+            }
+            linear_extrude(1, center=true) {
+                square(6.4, true);
+            }
+        }
+    }
 }
 
 module MidBanner() {
-    Octal(-1) import("views/MidBanner.svg");
+    difference() {
+        Octal(-1) import("views/MidBanner.svg");
+        linear_extrude(18) {
+            translate([0, -1.3]) rotate(-135) square(10);
+        }
+    }
 }
 
 module BottomBanner() {
