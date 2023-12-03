@@ -1,9 +1,17 @@
-INKSCAPE := inkscape
+INKSCAPE ?= inkscape
+OPENSCAD ?= openscad
 
-all: all_views
+.PHONY: all
+all:
 
+.PHONY: clean
 clean:
-	rm -r views/
+	rm -rf views/
+	rm -f image.png
+
+image.png: H0DutchVintageMailbox.scad all_views
+	$(OPENSCAD) $< -o $@
+all: image.png
 
 .PHONY: all_views
 all_views: views/BaseFront.svg
@@ -15,6 +23,7 @@ all_views: views/MidBanner.svg
 all_views: views/BottomBanner.svg
 all_views: views/BaseFrontLayer1.svg
 all_views: views/BaseFrontLayer2.svg
+all: all_views
 
 views/%.svg: Views.svg
 	$(INKSCAPE) $< --export-id=$(basename $(notdir $@)) \
