@@ -1,3 +1,5 @@
+module __Customizer_Limit__ () {}
+
 VEC_X = [1, 0, 0];
 VEC_Y = [0, 1, 0];
 
@@ -7,7 +9,7 @@ Base();
 
 Top();
 Roof();
-//TopBanner();
+TopBanner();
 MidBanner();
 BottomBanner();
 
@@ -15,10 +17,10 @@ module Base() {
     Base();
     
     rotate(90, VEC_X) {
-        linear_extrude(mm(2.82)) {
+        linear_extrude(mm(2.75 + 0.09)) {
             import("views/BaseFrontLayer1.svg");
         }
-        linear_extrude(mm(2.89)) {
+        linear_extrude(mm(2.75 + 0.18)) {
             import("views/BaseFrontLayer2.svg");
         }
     }
@@ -68,6 +70,14 @@ module TopBanner() {
             linear_extrude(1, center=true) {
                 square(6.4, true);
             }
+        }
+    }
+    translate([0, 0, 14.5]) {
+        rotate(90, VEC_X) linear_extrude(3.3) {
+            text("Post",
+                 size = 0.55,
+                 valign="center",
+                 halign="center");
         }
     }
 }
