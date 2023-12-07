@@ -64,10 +64,10 @@ module TopBanner() {
         Octal(-1) import("views/TopBanner.svg");
         translate([0, 0, 14.5]) difference() {
             union() {
-                cube([5.2, 8, .6], true);
-                cube([8,5.2, .6], true);
+                cube([5.2, 8, .67], true);
+                cube([8,5.2, .67], true);
             }
-            linear_extrude(1, center=true) {
+            linear_extrude(1.0, center=true) {
                 square(6.4, true);
             }
         }
